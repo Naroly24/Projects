@@ -1,0 +1,21 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model AppCRUD.Models.Evento
+
+<div class="container">
+    <h2>¿Estás seguro que quieres eliminar este evento?</h2>
+
+    <div>
+        <h4>@Model.Nombre</h4>
+        <p>@Model.Descripcion</p>
+    </div>
+
+    <form asp-action="EliminarConfirmado" method="post">
+        <input type="hidden" asp-for="IdEvento" />
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a asp-controller="Evento" asp-action="Lista" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

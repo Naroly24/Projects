@@ -1,0 +1,57 @@
+﻿@model List<AppCRUD.Models.Evento>
+
+<div class="row">
+    <div class="col-sm-8 offset-sm-2">
+        <h2>Lista de eventos</h2>
+
+        <!-- Botón para agregar un nuevo evento -->
+        <a asp-controller="Evento" asp-action="Nuevo" class="btn btn-primary mb-3">Nuevo Evento</a>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Fecha</th>
+                    <th>Ubicación</th>
+                    <th>Capacidad Máxima</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.IdEvento</td>
+                        <td>@item.Nombre</td>
+                        <td>@item.Descripcion</td>
+                        <td>@item.Fecha.ToString("dd/MM/yyyy")</td>
+                        <td>@item.Ubicacion</td>
+                        <td>@item.CapacidadMaxima</td>
+                        <td>
+                            <!-- Botón de Editar -->
+                            <a asp-controller="Evento" asp-action="Editar" asp-route-id="@item.IdEvento" class="btn btn-sm btn-warning">Editar</a>
+
+                            <!-- Botón de Eliminar -->
+                            <form asp-controller="Evento" asp-action="EliminarConfirmado" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="@item.IdEvento" />
+                                <button type="submit" onclick="return confirmar()" class="btn btn-sm btn-danger">Eliminar</button>
+                            </form>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        function confirmar() {
+           return confirm("Esta seguro de eliminar el evento?")
+        }
+    </script>
+}
+
